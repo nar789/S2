@@ -1,8 +1,26 @@
 // After the API loads, call a function to enable the search box.
 var id=new Array();
+
+
+function chkmsg(){
+
+  $.post("./../checkS2Msg.php").done(function(data){
+        if(data){
+          $('#textmsg').val(data);
+          msg();
+          $.post("./../msg_update.php?msg=").done(function(data){});
+        }
+    });
+    
+    
+}
+
+
+
+
 function handleAPILoaded() {
   $('#search-button').attr('disabled', false);
-  
+  setInterval(chkmsg,1000);
 }
 
 // Search for a specified string.
@@ -66,3 +84,6 @@ function msg(){
   else if(msg.includes(back))
     search();
 }
+
+
+
