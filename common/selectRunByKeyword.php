@@ -1,5 +1,5 @@
 <?php
-  include("mysql/dbconnect.php");
+  include("db_conn.php");
 
   $keyword=$_GET['keyword'];
 
