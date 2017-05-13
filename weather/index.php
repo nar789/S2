@@ -1,3 +1,40 @@
+<?php
+  $url='http://weather.naver.com/rgn/cityWetrCity.nhn?cityRgnCd=CT010011';
+
+  $ch = curl_init();
+  curl_setopt($ch,CURLOPT_URL,$url);
+  curl_setopt($ch,CURLOPT_POST,false);   //GET 전송방식
+  curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
+  $response=curl_exec($ch);
+  $slidePoint1=strpos($response,'<div class="c_tit2" id="content_sub">');
+  $slideStrCount=strpos($response,'<div class="c_tit">')-$slidePoint1;
+  $contents=substr($response,$slidePoint1,$slideStrCount);
+
+
+  //온도 오전 오후 Return $Forecast_temp
+  preg_match_all('/<span class=\"temp\">[^<]*/',$contents,$matchs);
+  $forecast_temp=array();
+  for($i=0;$i<7;$i++){
+    // $i*2+1;
+    // ($i+1)*2;
+    array_push($forecast_temp,array(
+      "오전".preg_replace('/<span class=\"temp\">/','',$matchs[0][($i*2)+1])."℃",
+      "오후".preg_replace('/<span class=\"temp\">/','',$matchs[0][($i+1)*2])."℃"));
+  }
+
+  //날씨 평 오전 오후 Return $forecast_comment
+  preg_match_all('/<li........info..[^<]*/',$contents,$matchs);
+  $forecast_comment=array();
+  for($i=0;$i<7;$i++){
+    array_push($forecast_comment,array(
+      preg_replace('/<li........info../','',$matchs[0][$i*2]),
+      preg_replace('/<li........info../','',$matchs[0][$i*2+1])));
+  }
+
+  $date=$_GET['date'];
+  if($date=="")$date=0;
+  $tommorow= mktime(0,0,0,date("m"),date("d")+$date,date("y"));
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -59,11 +96,11 @@
     <div class="swiper-container">
         <div class="swiper-wrapper">
             <div class="swiper-slide">
-              <div id=date>05월 13일 토요일</div>
-              <div id=time>오전 2:48</div>
-              <div id=about_schedule>매일 아침 7시 30분</div>
-              <div id=add_schedule>일정 추가 가능</div>
-              <div id=until_schedule></div>
+
+              <div id=date><?php echo $day=date('M d D',$tommorow);?></div>
+
+              <div id=about_schedule><?php echo $forecast_temp[$date][0]." ".$forecast_temp[$date][0];?></div>
+              <div id=add_schedule><?php echo $forecast_comment[$date][0]." ".$forecast_comment[$date][0]?></div>
             </div>
         </div>
         <!-- Add Pagination -->
@@ -78,7 +115,7 @@
 
     <!-- Initialize Swiper -->
     <script>
-    var schedule=["1951"];
+    var schedule=["730"];
     var swiper = new Swiper('.swiper-container', {
         initialSlide:2,
         pagination: '.swiper-pagination',
@@ -108,27 +145,12 @@
       document.getElementById('time').innerHTML=ampm+" "+hour+":"+miniutes+"";
     }
     function checkSchedule(){
-      var d=new Date();
-      var hourminutes=""+d.getHours()+""+d.getMinutes();
-      for(var i in schedule){
-        if(schedule[i]==hourminutes){
-          alert("alarm");
-        }
-        document.getElementById('until_schedule').innerHTML=schedule[i]+":::"+hourminutes;
-      }
+
     }
-    function addSchedule(hour,minute){
-      schedule.push(hour,minute);
-    }
-    function addSchedule(time){
-      schedule.push(time);
-    }
-    <?php
-      $str=$_GET['date'];
-      echo "addSchedule('$str');";
-    ?>
     setInterval(setTime,1000);
-    setInterval(checkSchedule,1000);
+    window.onmessage=function(e){
+    
+    }
     </script>
 </body>
 </html>

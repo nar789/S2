@@ -83,7 +83,6 @@
     function startMsg(keyword){
       $.get("selectRunByKeyword.php",{keyword:keyword}).done(function(data){
         if(data=="pass"){
-
         }else{
           document.getElementById('mainFrame').src=data;
           alert(data);
@@ -106,6 +105,13 @@
         }else if(data.includes("프레젠테이션")){
           slide_number=3;
           keyword_str="프레젠테이션";
+        }
+        if(data.includes("작게")){
+          document.getElementById('mainFrame').style.width="40%";
+          document.getElementById('mainFrame').style.height="40%";
+        }else if(data.includes("크게")){
+          document.getElementById('mainFrame').style.width="100%";
+          document.getElementById('mainFrame').style.height="20%";
         }
         swiper.slideTo(slide_number,300,function(){});
         if(data.includes("실행")){
