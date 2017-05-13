@@ -34,6 +34,12 @@
   $date=$_GET['date'];
   if($date=="")$date=0;
   $tommorow= mktime(0,0,0,date("m"),date("d")+$date,date("y"));
+
+  $cssIcon['맑음']="<div class='sunny'></div>";
+  $cssIcon['비']="<div class='rainy'></div>";
+  $cssIcon['구름조금']="<div class='cloudy'></div>";
+  $cssIcon['구름많음']="<div class='cloudy'></div>";
+  $cssIcon['흐림']="<div class='cloudy'></div>";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -42,32 +48,12 @@
     <title>Swiper demo</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
 
-    <!-- Link Swiper's CSS -->
-    <link rel="stylesheet" href="../Swiper-3.4.2/dist/css/swiper.min.css">
+    <link rel="stylesheet" type="text/css" href="weatherIcon/weatherIcon.css">
 
     <!-- Demo styles -->
     <style>
-    body {
-        background: black;
-        font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-        font-size: 14px;
-        color:#000;
-        margin: 0;
-        padding: 0;
-    }
-    .swiper-container {
-        width: 100%;
-        padding-top: 50px;
-        padding-bottom: 50px;
-    }
-    .swiper-slide {
-        background-position: center;
-        background-size: cover;
-        width: 300px;
-        height: 300px;
-        background-color:rgba(255,255,255,0.2);
-        border-radius:10px;
-        box-shadow:0px 0px 5px 3px rgba(255,255,255,0.3);
+    body{
+      background-color:black;
     }
     #date{
       color:white;
@@ -89,67 +75,41 @@
       color:white;
       text-align:center;
     }
+    #weather_icon{
+      width:0px;
+      height:120px;
+      position:relative;
+    }
     </style>
 </head>
 <body>
-    <!-- Swiper -->
-    <div class="swiper-container">
-        <div class="swiper-wrapper">
-            <div class="swiper-slide">
-
-              <div id=date><?php echo $day=date('M d D',$tommorow);?></div>
-
-              <div id=about_schedule><?php echo $forecast_temp[$date][0]." ".$forecast_temp[$date][0];?></div>
-              <div id=add_schedule><?php echo $forecast_comment[$date][0]." ".$forecast_comment[$date][0]?></div>
-            </div>
-        </div>
-        <!-- Add Pagination -->
-        <div class="swiper-pagination"></div>
-    </div>
-
-    <!-- Swiper JS -->
-    <script src="../Swiper-3.4.2/dist/js/swiper.min.js"></script>
-
+  <center>
+    <div id=date><?php echo $day=date('M d D',$tommorow);?></div>
+    <div id=weather_icon><?php
+    if(date("a")=="am"){
+      echo $cssIcon[$forecast_comment[$date][0]];
+    }else{
+      echo $cssIcon[$forecast_comment[$date][1]];
+    }
+    ?></div>
+    <div id=about_schedule><?php
+    if(date("a")=="am"){
+      echo $forecast_temp[$date][0];
+    }else{
+      echo $forecast_temp[$date][1];
+    }?></div>
+  </center>
     <!-- jquery JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     <!-- Initialize Swiper -->
     <script>
-    var schedule=["730"];
-    var swiper = new Swiper('.swiper-container', {
-        initialSlide:2,
-        pagination: '.swiper-pagination',
-        effect: 'coverflow',
-        grabCursor: true,
-        centeredSlides: true,
-        slidesPerView: 'auto',
-        coverflow: {
-            rotate: 50,
-            stretch: 0,
-            depth: 100,
-            modifier: 1,
-            slideShadows : true
-        },
-        onTransitionEnd:function(swip){
-        }
-    });
-    function setTime(){
-      var d=new Date();
-      var hour=d.getHours();
-      var miniutes=d.getMinutes();
-      if(hour<12){
-        var ampm="오전";
-      }else{
-        var ampm="오후";
-      }
-      document.getElementById('time').innerHTML=ampm+" "+hour+":"+miniutes+"";
-    }
+
     function checkSchedule(){
 
     }
-    setInterval(setTime,1000);
     window.onmessage=function(e){
-    
+
     }
     </script>
 </body>
