@@ -1,34 +1,66 @@
+
+@import url(http://cdn.jsdelivr.net/font-nanum/1.0/nanumbarungothic/nanumbarungothic.css);
+
+
+
 body {
-        background: #fff;
-        font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-        font-size: 14px;
-        color:#000;
-        margin: 0;
-        padding: 0;
-        background-color:black;
-    }
+  
+  font-family: 'Nanum Barun Gothic';
+  font-size: 30px;
+  margin:0px;
+  padding:0px;
+  background-color: black;
+
+}
+
 .swiper-container {
+    margin-top: 30px;
+    margin-bottom: 30px;
     width: 100%;
 }
+
 .swiper-slide {
+    
     background-position: center;
     background-size: cover;
     width: 300px;
     height: 70px;
+
 }
+
 #icon{
+  
   border-radius: 50px;
-  width: 40px;
+  width: 300px;
   height: 40px;
   padding: 10px;
   color: white;
 }
-#mainFrame{
-  width:100%;
-  height:100%;
-  background-color:white;
+
+#mainframe{
+  left:10%;
+  border:0.5px solid white;
+  position: absolute;
+  display: inline-block;
+  margin-top: 10px;
+  width:40%;
+  height:500px;
+  overflow:hidden;
 }
-.iframe_tier{
+
+#msg{
+  font-size: 30px;
   width:100%;
-  height:300px;
+  position: absolute;
+  bottom:0px;
+  color: rgba(255,255,255,1);
+  text-align: center;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  
+  -webkit-transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1) 10ms;
+  -moz-transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1) 10ms;
+  -o-transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1) 10ms;
+  transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1) 10ms;
+  text-shadow: 0 0 5px rgb(255,255,255) , 0 0 10px rgb(255,255,255) , 0 0 15px rgb(255,255,255) , 0 0 20px rgb(255,17,119) , 0 0 35px rgb(255,17,119) , 0 0 40px rgb(255,17,119) , 0 0 50px rgb(255,17,119) , 0 0 75px rgb(255,17,119) ;
 }

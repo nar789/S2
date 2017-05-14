@@ -1,49 +1,53 @@
 <!doctype html>
 <html>
   <head>
-    <title>Search</title>
-     <link rel="stylesheet" type="text/css" href="search.css"> 
+    
+    <meta charset="utf-8">
+    <title>youtube</title>
+    
+
+    <link rel="stylesheet" type="text/css" href="css/search.css"> 
+    <link rel="stylesheet" type="text/css" href="css/loading.css"> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+
   </head>
+  
+
   <body>
 
-    <input type=text id=textmsg></input>
-    <button type="button" onclick=msg()>MSG</button>
+  
+     <div id='c'>
+      <center><p>어떤 영상을 찾아드릴까요?</p></center>
+      <div class='s'></div>
+      <div class='s'></div>
+      <div class='s'></div>
+      <div class='s'></div>
+      <div class='s'></div>
+      <div class='s'></div>
+    </div>
+
+
+    <input type=text id=textmsg style="display:none;"></input>
+    <button type="button" onclick=msgclick() style="display:none;">MSG</button>
     <br>
 
     <button type="button" onclick=play(1) style="display:none;">PLAY</button>
-      <label  style="display:none;"> <input id="query" value='cats' type="text"/><button id="search-button" disabled onclick="search()">Search</button></label>
-    </div>
-    <div id="search-container">
-    </div>
+    <label  style="display:none;"> <input id="query" value='cats' type="text"/>
+      <button id="search-button" disabled onclick="search()">Search</button>
+    </label>
+    <center>
+      <div id="search-container">
+      </div>
+    </center>
+
+
+
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-    <script src="auth.js"></script>
-     <?
-      
-      //$msg=$_GET['msg'];
-      //$code=$_GET['code'];
-      //$msg=iconv("utf-8","euc-kr",$msg);
-      $text=iconv("utf-8","euc-kr","로");
-      $text1=iconv("utf-8","euc-kr","을");
-      $text2=iconv("utf-8","euc-kr","를");
-      $s1=iconv("utf-8","euc-kr","검색");
-      $sel1=iconv("utf-8","euc-kr","첫번");
-      $sel2=iconv("utf-8","euc-kr","두번");
-      $sel3=iconv("utf-8","euc-kr","세번");
-      $sel4=iconv("utf-8","euc-kr","네번");
-      $sel5=iconv("utf-8","euc-kr","다섯");
-      $back=iconv("utf-8","euc-kr","목록");
-      echo "<script>var text='".$text."';
-      var text1='".$text1."';
-      var text2='".$text2."';
-      var s1='".$s1."';
-      var sel1='".$sel1."';
-      var sel2='".$sel2."';
-      var sel3='".$sel3."';
-      var sel4='".$sel4."';
-      var sel5='".$sel5."';
-      var back='".$back."';</script>";
-    ?>
-    <script src="search.js"></script>
+    <script src="js/loading.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/cmd.json"></script>
+    <script src="js/msg.js"></script>
+    <script src="js/search.js"></script>
     <script src="https://apis.google.com/js/client.js?onload=googleApiClientReady"></script>
    
 

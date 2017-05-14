@@ -1,58 +1,87 @@
-   var ifs=["","","",""];
+var swiper = new Swiper('.swiper-container', {
+    effect: 'coverflow',
+    grabCursor: true,
+    centeredSlides: true,
+    slidesPerView: 'auto',
+});
 
-    var keyword_str;
-    var started_proc=[];
+window.addEventListener("message",function(event){
+  if(event.data=="exit"){
+    $("#mainframe").attr('src','blank.html');
+    swiper.slideTo(2,500,function(){});
+    msg.run();
+  }else if(event.data[0]!="!"){
+    $('#msg').text(event.data);
+  }
+},false);
 
-    var swiper = new Swiper('.swiper-container', {
-        effect: 'coverflow',
-        grabCursor: true,
-        centeredSlides: true,
-        slidesPerView: 'auto',
-    });
-    function init(){
-      $.get("updateRunInit.php");
-    }
-    window.onload=init();
-    function startMsg(keyword){
-      $.get("selectRunByKeyword.php",{keyword:keyword}).done(function(data){
-        if(data=="pass"){
-        }else{
-          document.getElementById('mainFrame').src=data;
-          alert(data);
-        }
-      });
-    }
+var list=new Array();
 
-    function checkMsg(){
-      $.post("checkS2Msg.php").done(function(data){
-        var slide_number;
-        if(data.includes("youtube")){
-          slide_number=2;
-          keyword_str="유튜브";
-        }else if(data.includes("날씨")){
-          slide_number=1;
-          keyword_str="날씨";
-        }else if(data.includes("일정관리")){
-          slide_number=0;
-          keyword_str="일정관리";
-        }else if(data.includes("프레젠테이션")){
-          slide_number=3;
-          keyword_str="프레젠테이션";
-        }
-        if(data.includes("작게")){
-          document.getElementById('mainFrame').style.width="40%";
-          document.getElementById('mainFrame').style.height="40%";
-        }else if(data.includes("크게")){
-          document.getElementById('mainFrame').style.width="100%";
-          document.getElementById('mainFrame').style.height="20%";
-        }
-        swiper.slideTo(slide_number,300,function(){});
-        if(data.includes("실행")){
-          startMsg(keyword_str);
-        }else{
+function appSchedule(){//일정관리 앱 
+ // alert("일정관리");
+  swiper.slideTo(0,500,function(){});
+}
 
-        }
+function appWeather(){//날씨 앱 
+  clearInterval(msg.handler);
+  $('#mainframe').attr('src','./../weather/index.html');
+  swiper.slideTo(1,500,function(){});
+}
 
-      });
-    }
-    setInterval(checkMsg,1000);
+
+function appYoutube(){//유투브 앱 
+  clearInterval(msg.handler);
+  $('#mainframe').attr('src','./../youtube/index.html');
+  swiper.slideTo(3,500,function(){});
+}
+
+
+function appKakao(){//카카오 앱 
+  //alert("카카오톡");
+  swiper.slideTo(4,500,function(){});
+}
+
+function home(){ //홈으로
+  swiper.slideTo(2,500,function(){});
+}
+
+function moveleft(){
+  $("#mainframe").animate({left:'10%'});
+}
+
+function moveright(){ 
+  $("#mainframe").animate({left:'50%'});
+}
+
+function bigsize(){
+ $("#mainframe").animate({width:'80%'}); 
+}
+
+function smallsize(){
+  $("#mainframe").animate({width:'40%'}); 
+}
+
+function listInit(){
+  list.push(appSchedule);
+  list.push(appWeather);
+  list.push(appYoutube);
+  list.push(appKakao);
+  list.push(home);
+  list.push(moveright);
+  list.push(moveleft);
+  list.push(bigsize);
+  list.push(smallsize);
+
+  msg.SetCallback(list);
+}
+
+
+function init(){
+  listInit();
+  swiper.slideTo(2,500,function(){});
+  msg.run(); 
+}
+
+window.onload=init();
+
+

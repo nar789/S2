@@ -1,0 +1,10 @@
+body{
+	background-color: black;
+	overflow: hidden;
+}
+
+#mainframe{
+	overflow:hidden;
+	border:none;
+	height:500px;
+}
