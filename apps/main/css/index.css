@@ -4,7 +4,7 @@
 
 
 body {
-  
+
   font-family: 'Nanum Barun Gothic';
   font-size: 30px;
   margin:0px;
@@ -20,7 +20,7 @@ body {
 }
 
 .swiper-slide {
-    
+
     background-position: center;
     background-size: cover;
     width: 300px;
@@ -29,7 +29,7 @@ body {
 }
 
 #icon{
-  
+
   border-radius: 50px;
   width: 300px;
   height: 40px;
@@ -39,12 +39,13 @@ body {
 
 #mainframe{
   left:10%;
-  border:0.5px solid white;
+  border:none;
   position: absolute;
   display: inline-block;
   margin-top: 10px;
-  width:40%;
-  height:500px;
+  width:80%;
+  height: 80%;
+  margin-bottom: 20px;
   overflow:hidden;
 }
 
@@ -57,10 +58,19 @@ body {
   text-align: center;
   -o-text-overflow: ellipsis;
   text-overflow: ellipsis;
-  
+
   -webkit-transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1) 10ms;
   -moz-transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1) 10ms;
   -o-transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1) 10ms;
   transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1) 10ms;
   text-shadow: 0 0 5px rgb(255,255,255) , 0 0 10px rgb(255,255,255) , 0 0 15px rgb(255,255,255) , 0 0 20px rgb(255,17,119) , 0 0 35px rgb(255,17,119) , 0 0 40px rgb(255,17,119) , 0 0 50px rgb(255,17,119) , 0 0 75px rgb(255,17,119) ;
+}
+#battery{
+  display: none;
+  z-index: 50;
+  position: absolute;
+  width: 80%;
+  height: 80%;
+  margin-left: 10%;
+  border: none;
 }

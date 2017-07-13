@@ -19,6 +19,9 @@ function Four()
 {
 	$('#mainframe').attr('src','weather.php?date=4');
 }
+function Week(){
+	$('#mainframe').attr('src','weatherWeek.php');
+}
 function Exit()
 {
 	clearInterval(msg.handler);
@@ -33,6 +36,7 @@ function listinit()
 	list.push(Two);
 	list.push(Three);
 	list.push(Four);
+	list.push(Week);
 	list.push(Exit);
 	msg.SetCallback(list);
 }

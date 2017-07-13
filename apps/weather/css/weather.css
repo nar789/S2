@@ -4,7 +4,10 @@
   font-family: 'Nanum Barun Gothic';
   background-color:black;
 }
-
+#box{
+  display:inline-block;
+  margin:10px;
+}
 
 #date{
   margin-top: 30px;

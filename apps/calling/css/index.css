@@ -1,0 +1,86 @@
+body{
+	background-color: black;
+	overflow: hidden;
+}
+
+.people-box{
+	display: inline-block;
+	margin:20px;
+	width:100px;
+	height: 100px;
+	text-align: center;
+	vertical-align: top;
+}
+.people-animation{
+	display: none;
+}
+
+img{
+	display: block;
+	width:70px;
+	margin:0px;
+	padding:0px;
+}
+p{
+	margin:0px;
+	padding:0px;
+	color:white;
+}
+
+#sel-people{
+	position: absolute;
+	left:-100%;
+	width:100%;
+}
+
+#sel-img{
+	width: 100%;
+    border-radius: 100%;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+}
+
+#sel-p{
+	font-size: 100px;
+}
+
+.call-animation {
+    background: #000;
+    width: 400px;
+    height: 400px;
+    position: relative;
+    margin: 0 auto;
+    border-radius: 100%;
+    border: solid 5px #fff;
+    animation: play 2s ease infinite;
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -ms-backface-visibility: hidden;
+    backface-visibility: hidden;
+  
+}
+
+@keyframes play {
+
+    0% {
+        transform: scale(1);
+    }
+    15% {
+        box-shadow: 0 0 0 30px rgba(255, 255, 255, 0.4);
+    }
+    25% {
+        box-shadow: 0 0 0 50px rgba(255, 255, 255, 0.4), 0 0 0 20px rgba(255, 255, 255, 0.2);
+    }
+    25% {
+        box-shadow: 0 0 0 60px rgba(255, 255, 255, 0.4), 0 0 0 30px rgba(255, 255, 255, 0.2);
+    }
+
+}
+
+#name{
+	visibility: hidden;
+}
+#name-btn{
+	visibility: hidden;	
+}

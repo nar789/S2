@@ -5,7 +5,10 @@
   $result=mysqli_query($con,$query);
   if($result){
     while($row=mysqli_fetch_row($result)){
-      echo $row[1];
+      if($row[1])
+        echo $row[1];
+      else
+        echo "success";
     }
   }else{
   	echo "fail.";
